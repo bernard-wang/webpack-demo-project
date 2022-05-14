@@ -1,0 +1,5 @@
+{
+  "extends": "@imhele/tsconfig",
+  "exclude": ["**/node_modules/**"],
+  "include": ["src/**/*"]
+}
