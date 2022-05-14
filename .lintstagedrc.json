@@ -1,0 +1,5 @@
+{
+  "*.{ts,tsx,mts,mtsx,cts,ctsx,js,jsx,mjs,mjsx,cjs,cjsx}": "x-eslint --fix",
+  "*.{md,mdx,json,html}": "x-prettier --write",
+  "*.{css,less}": "x-stylelint --fix"
+}

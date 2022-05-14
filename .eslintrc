@@ -1,0 +1,5 @@
+{
+  "root": true,
+  "extends": "plugin:@imhele/core",
+  "overrides": [{ "files": ["./*.{ts,mts,cts,js,mjs,cjs}"], "extends": "plugin:@imhele/node" }]
+}

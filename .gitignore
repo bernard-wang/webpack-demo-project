@@ -1,0 +1,35 @@
+# production
+build/
+dist/
+release/
+
+# local
+.idea/
+.pnpm-store/
+coverage/
+log/
+node_modules/
+*.local.*
+*.lcov
+*.log*
+*.pid
+*.pid.*
+*.report
+*.tsbuildinfo
+.DS_Store
+.cache-loader
+.docusaurus
+.env.*.local
+.eslintcache
+.history
+.npm
+.lock-wscript
+.node_repl_history
+.nyc_output
+.pnp
+.pnp.js
+.rts*
+.sonarlint
+.stylelintcache
+.yarn-integrity
+lib-cov
