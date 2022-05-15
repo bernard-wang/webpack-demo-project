@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "pnpm run dev",
+      "name": "pnpm run dev",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}
