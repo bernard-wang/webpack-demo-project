@@ -24,7 +24,7 @@ function createConfig(): webpack.Configuration {
     include: path.resolve('src'),
     loader: 'babel-loader',
     options: {
-      plugins: [...(__DEV__ ? ['react-refresh/babel'] : [])],
+      plugins: [__DEV__ && 'react-refresh/babel'].filter(isTruthy),
       presets: [
         ['@babel/preset-env'],
         ['@babel/preset-react', { runtime: 'automatic' }],
@@ -64,12 +64,16 @@ function createConfig(): webpack.Configuration {
     plugins: [
       new HtmlWebpackPlugin(),
       new WebpackBar(),
-      ...(__DEV__ ? [new ReactRefreshPlugin()] : []),
-    ],
+      __DEV__ && new ReactRefreshPlugin(),
+    ].filter(isTruthy),
     resolve: {
       extensions: [...ScriptExtensions, '.json'],
       plugins: [new TSConfigPathsPlugin()],
     },
     stats: 'none',
   };
+}
+
+function isTruthy<T>(value: T): value is Exclude<T, 0 | '' | false | null | undefined> {
+  return !!value;
 }
