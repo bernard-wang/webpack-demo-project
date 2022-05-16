@@ -20,7 +20,7 @@ specifiers:
   autoprefixer: ^10.4.7
   babel-loader: ^8.2.5
   css-loader: ^6.7.1
-  cssnano: ^5.1.7
+  css-minimizer-webpack-plugin: ^3.4.1
   eslint: ^8.15.0
   fork-ts-checker-webpack-plugin: ^7.2.11
   html-webpack-plugin: ^5.5.0
@@ -69,7 +69,7 @@ devDependencies:
   autoprefixer: 10.4.7_postcss@8.4.13
   babel-loader: 8.2.5_we4j6ycntotymd3gptdmlkk2fi
   css-loader: 6.7.1_webpack@5.72.1
-  cssnano: 5.1.7_postcss@8.4.13
+  css-minimizer-webpack-plugin: 3.4.1_webpack@5.72.1
   eslint: 8.15.0
   fork-ts-checker-webpack-plugin: 7.2.11_2hec2f53gorvnt76tmqcnwez5i
   html-webpack-plugin: 5.5.0_webpack@5.72.1
@@ -3147,6 +3147,34 @@ packages:
       postcss-modules-values: 4.0.0_postcss@8.4.13
       postcss-value-parser: 4.2.0
       semver: 7.3.7
+      webpack: 5.72.1_webpack-cli@4.9.2
+    dev: true
+
+  /css-minimizer-webpack-plugin/3.4.1_webpack@5.72.1:
+    resolution: {integrity: sha512-1u6D71zeIfgngN2XNRJefc/hY7Ybsxd74Jm4qngIXyUEk7fss3VUzuHxLAq/R8NAba4QU9OUSaMZlbpRc7bM4Q==}
+    engines: {node: '>= 12.13.0'}
+    peerDependencies:
+      '@parcel/css': '*'
+      clean-css: '*'
+      csso: '*'
+      esbuild: '*'
+      webpack: ^5.0.0
+    peerDependenciesMeta:
+      '@parcel/css':
+        optional: true
+      clean-css:
+        optional: true
+      csso:
+        optional: true
+      esbuild:
+        optional: true
+    dependencies:
+      cssnano: 5.1.7_postcss@8.4.13
+      jest-worker: 27.5.1
+      postcss: 8.4.13
+      schema-utils: 4.0.0
+      serialize-javascript: 6.0.0
+      source-map: 0.6.1
       webpack: 5.72.1_webpack-cli@4.9.2
     dev: true
 

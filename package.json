@@ -7,7 +7,7 @@
   "author": "",
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack",
+    "dev": "NODE_ENV=development webpack serve",
     "lint": "pnpm run lint:script && pnpm run lint:style && pnpm run lint:prettier",
     "lint:fix": "pnpm run lint:script:fix && pnpm run lint:style:fix && pnpm run lint:prettier:fix",
     "lint:prettier": "x-prettier --check \"**/*.{html,json,jsonc,md,mdx}\"",
@@ -50,7 +50,7 @@
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
-    "cssnano": "^5.1.7",
+    "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.15.0",
     "fork-ts-checker-webpack-plugin": "^7.2.11",
     "html-webpack-plugin": "^5.5.0",
