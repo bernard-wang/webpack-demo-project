@@ -47,6 +47,7 @@ function createConfig(): webpack.Configuration {
     devServer: {
       hot: true,
     },
+    devtool: __DEV__ ? 'cheap-module-source-map' : 'source-map',
     entry: './src',
     mode: __DEV__ ? 'development' : 'production',
     module: {
