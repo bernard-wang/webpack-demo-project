@@ -1,5 +1,6 @@
 /// <reference types="webpack-dev-server" />
 
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { escapeRegExp } from 'lodash';
 import path from 'path/posix';
@@ -23,10 +24,11 @@ function createConfig(): webpack.Configuration {
     include: path.resolve('src'),
     loader: 'babel-loader',
     options: {
+      plugins: [...(__DEV__ ? ['react-refresh/babel'] : [])],
       presets: [
-        '@babel/preset-env',
+        ['@babel/preset-env'],
         ['@babel/preset-react', { runtime: 'automatic' }],
-        '@babel/preset-typescript',
+        ['@babel/preset-typescript'],
       ],
     },
     test: RegExp(`(${ScriptExtensions.map(escapeRegExp).join('|')})$`),
@@ -42,7 +44,9 @@ function createConfig(): webpack.Configuration {
       type: 'filesystem',
     },
     context: process.cwd(),
-    devServer: {},
+    devServer: {
+      hot: true,
+    },
     entry: './src',
     mode: __DEV__ ? 'development' : 'production',
     module: {
@@ -57,7 +61,11 @@ function createConfig(): webpack.Configuration {
     output: {
       path: path.resolve('dist'),
     },
-    plugins: [new HtmlWebpackPlugin(), new WebpackBar()],
+    plugins: [
+      new HtmlWebpackPlugin(),
+      new WebpackBar(),
+      ...(__DEV__ ? [new ReactRefreshPlugin()] : []),
+    ],
     resolve: {
       extensions: [...ScriptExtensions, '.json'],
       plugins: [new TSConfigPathsPlugin()],
