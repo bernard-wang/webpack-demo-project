@@ -46,10 +46,32 @@ function createConfig(): webpack.Configuration {
     },
   };
 
+  const cssModuleLoader: webpack.RuleSetUseItem = {
+    loader: 'css-loader',
+    options: {
+      importLoaders: 1,
+      module: {
+        localIdentName: __DEV__ ? '[path][name]__[local]' : '[hash:base64:9]',
+        mode: (p: string) => /\.(global|pure)\.\w+$/i.exec(p)?.[1] || 'local',
+      },
+    },
+  };
+
+  const depStyle: webpack.RuleSetRule = {
+    exclude: path.resolve('src'),
+    use: ['css-loader'],
+  };
+
+  const srcStyle: webpack.RuleSetRule = {
+    include: path.resolve('src'),
+    use: [cssModuleLoader, 'postcss-loader'],
+  };
+
   const style: webpack.RuleSetRule = {
     sideEffects: true,
     test: /\.css$/i,
-    use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+    use: [MiniCssExtractPlugin.loader],
+    rules: [{ oneOf: [depStyle, srcStyle] }],
   };
 
   return {
