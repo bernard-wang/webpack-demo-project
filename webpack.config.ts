@@ -2,6 +2,7 @@
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { escapeRegExp } from 'lodash';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -83,6 +84,11 @@ function createConfig(): webpack.Configuration {
       }),
       new WebpackBar(),
       __DEV__ && new ReactRefreshPlugin(),
+      !__DEV__ &&
+        new ForkTsCheckerPlugin({
+          issue: { include: [{ file: '**/src/**/*' }] },
+          typescript: { memoryLimit: 8192 },
+        }),
     ].filter(isTruthy),
     resolve: {
       extensions: [...ScriptExtensions, '.json'],
