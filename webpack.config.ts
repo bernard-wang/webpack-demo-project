@@ -23,11 +23,17 @@ export default createConfig();
 function createConfig(): webpack.Configuration {
   const __DEV__ = process.env.NODE_ENV === 'development';
 
-  const assets: webpack.RuleSetRule = {
-    parser: { dataUrlCondition: { maxSize: 2000 } },
-    test: /\.(gif|ico|jpe?g|png|webp)$/i,
-    type: 'asset',
-  };
+  const assets: webpack.RuleSetRule[] = [
+    { resourceQuery: /\?inline$/, type: 'asset/inline' },
+    { resourceQuery: /\?resource$/, type: 'asset/resource' },
+    { resourceQuery: /\?source$/, type: 'asset/source' },
+    { test: /\.(html?|txt)$/i, type: 'asset/source' },
+    {
+      parser: { dataUrlCondition: { maxSize: 2000 } },
+      test: /\.(bmp|gif|ico|jpe?g|png|webp)$/i,
+      type: 'asset',
+    },
+  ];
 
   const babel: webpack.RuleSetRule = {
     include: path.resolve('src'),
@@ -50,7 +56,7 @@ function createConfig(): webpack.Configuration {
     loader: 'css-loader',
     options: {
       importLoaders: 1,
-      module: {
+      modules: {
         localIdentName: __DEV__ ? '[path][name]__[local]' : '[hash:base64:9]',
         mode: (p: string) => /\.(global|pure)\.\w+$/i.exec(p)?.[1] || 'local',
       },
@@ -91,7 +97,7 @@ function createConfig(): webpack.Configuration {
     entry: './src',
     mode: __DEV__ ? 'development' : 'production',
     module: {
-      rules: [{ oneOf: [assets, babel, style] }],
+      rules: [{ oneOf: [...assets, babel, style] }],
     },
     name: 'client',
     optimization: {
