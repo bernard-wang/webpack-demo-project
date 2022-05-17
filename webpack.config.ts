@@ -1,8 +1,10 @@
 /// <reference types="webpack-dev-server" />
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { escapeRegExp } from 'lodash';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path/posix';
 import TerserPlugin from 'terser-webpack-plugin';
 import TSConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
@@ -34,6 +36,11 @@ function createConfig(): webpack.Configuration {
     test: RegExp(`(${ScriptExtensions.map(escapeRegExp).join('|')})$`),
   };
 
+  const style: webpack.RuleSetRule = {
+    test: /\.css$/i,
+    use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+  };
+
   return {
     cache: {
       buildDependencies: {
@@ -51,12 +58,12 @@ function createConfig(): webpack.Configuration {
     entry: './src',
     mode: __DEV__ ? 'development' : 'production',
     module: {
-      rules: [{ oneOf: [babel] }],
+      rules: [{ oneOf: [babel, style] }],
     },
     name: 'client',
     optimization: {
       minimize: !__DEV__,
-      minimizer: [new TerserPlugin()],
+      minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
       splitChunks: { chunks: 'all' },
     },
     output: {
@@ -64,6 +71,7 @@ function createConfig(): webpack.Configuration {
     },
     plugins: [
       new HtmlWebpackPlugin(),
+      new MiniCssExtractPlugin(),
       new WebpackBar(),
       __DEV__ && new ReactRefreshPlugin(),
     ].filter(isTruthy),
