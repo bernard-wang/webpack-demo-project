@@ -67,11 +67,20 @@ function createConfig(): webpack.Configuration {
       splitChunks: { chunks: 'all' },
     },
     output: {
+      assetModuleFilename: 'static/media/[name].[hash:8][ext]',
+      chunkFilename: `static/js/[id]${__DEV__ ? '' : '.[contenthash:8]'}.js`,
+      clean: true,
+      environment: { bigIntLiteral: true, dynamicImport: true, module: true },
+      filename: `static/js/[name]${__DEV__ ? '' : '.[contenthash:8]'}.js`,
       path: path.resolve('dist'),
     },
     plugins: [
       new HtmlWebpackPlugin(),
-      new MiniCssExtractPlugin(),
+      new MiniCssExtractPlugin({
+        chunkFilename: `static/css/[name]${__DEV__ ? '' : '.[contenthash:8]'}.css`,
+        filename: `static/css/[name]${__DEV__ ? '' : '.[contenthash:8]'}.css`,
+        runtime: true,
+      }),
       new WebpackBar(),
       __DEV__ && new ReactRefreshPlugin(),
     ].filter(isTruthy),
