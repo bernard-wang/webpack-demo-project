@@ -23,21 +23,31 @@ export default createConfig();
 function createConfig(): webpack.Configuration {
   const __DEV__ = process.env.NODE_ENV === 'development';
 
+  const assets: webpack.RuleSetRule = {
+    parser: { dataUrlCondition: { maxSize: 2000 } },
+    test: /\.(gif|ico|jpe?g|png|webp)$/i,
+    type: 'asset',
+  };
+
   const babel: webpack.RuleSetRule = {
     include: path.resolve('src'),
-    loader: 'babel-loader',
-    options: {
-      plugins: [__DEV__ && 'react-refresh/babel'].filter(isTruthy),
-      presets: [
-        ['@babel/preset-env'],
-        ['@babel/preset-react', { runtime: 'automatic' }],
-        ['@babel/preset-typescript'],
-      ],
+    test: RegExp(`(${ScriptExtensions.map(escapeRegExp).join('|')})$`, 'i'),
+    type: 'javascript/auto',
+    use: {
+      loader: 'babel-loader',
+      options: {
+        plugins: [__DEV__ && 'react-refresh/babel'].filter(isTruthy),
+        presets: [
+          ['@babel/preset-env'],
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          ['@babel/preset-typescript'],
+        ],
+      },
     },
-    test: RegExp(`(${ScriptExtensions.map(escapeRegExp).join('|')})$`),
   };
 
   const style: webpack.RuleSetRule = {
+    sideEffects: true,
     test: /\.css$/i,
     use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
   };
@@ -59,7 +69,7 @@ function createConfig(): webpack.Configuration {
     entry: './src',
     mode: __DEV__ ? 'development' : 'production',
     module: {
-      rules: [{ oneOf: [babel, style] }],
+      rules: [{ oneOf: [assets, babel, style] }],
     },
     name: 'client',
     optimization: {

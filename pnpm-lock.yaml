@@ -10,7 +10,7 @@ specifiers:
   '@imhele/eslint-plugin': ^0.1.0
   '@imhele/prettier-config': ^0.1.0
   '@imhele/rule-set-scripts': ^0.1.0
-  '@imhele/stylelint-config': ^0.1.0
+  '@imhele/stylelint-config': ^0.1.1
   '@imhele/tsconfig': ^0.1.0
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.6
   '@types/html-webpack-plugin': ^3.2.6
@@ -60,7 +60,7 @@ devDependencies:
   '@imhele/eslint-plugin': 0.1.0_cuyhlmwcz7ackoth2jicstkjzm
   '@imhele/prettier-config': 0.1.0_prettier@2.6.2
   '@imhele/rule-set-scripts': 0.1.0_as7jyyww7bjjn3ra3co7h5vlfy
-  '@imhele/stylelint-config': 0.1.0_an3wuxxoixcpivwd2moqhhly5q
+  '@imhele/stylelint-config': 0.1.1_an3wuxxoixcpivwd2moqhhly5q
   '@imhele/tsconfig': 0.1.0_typescript@4.7.1-rc
   '@pmmmwh/react-refresh-webpack-plugin': 0.5.6_dht25cu4po3ounlhlctzwihdn4
   '@types/html-webpack-plugin': 3.2.6
@@ -1749,8 +1749,8 @@ packages:
       typescript: 4.7.1-rc
     dev: true
 
-  /@imhele/stylelint-config/0.1.0_an3wuxxoixcpivwd2moqhhly5q:
-    resolution: {integrity: sha512-JSCYdorP/nb9BJAnxRkX1QJoChvuSvWpB+LehceuIvVD1HLEzeS9FBwt2e+sGu6CEWPVmrz0Xz12+3kuZ/zpeg==}
+  /@imhele/stylelint-config/0.1.1_an3wuxxoixcpivwd2moqhhly5q:
+    resolution: {integrity: sha512-4Gl8h/4AXl3nXt0znHcRM14mU2GF5hR1OjN/0iG6MYLKPFGYZRWtmpcw5kV0316rO95vQllpn7AhKejWXATffg==}
     peerDependencies:
       postcss: ^8.4.13
       postcss-less: ^6.0.0
