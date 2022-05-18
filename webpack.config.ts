@@ -42,7 +42,10 @@ function createConfig(): webpack.Configuration {
     use: {
       loader: 'babel-loader',
       options: {
-        plugins: [__DEV__ && 'react-refresh/babel'].filter(isTruthy),
+        plugins: [
+          ['@babel/plugin-transform-runtime', { helpers: true, regenerator: true }],
+          __DEV__ && ['react-refresh/babel'],
+        ].filter(isTruthy),
         presets: [
           ['@babel/preset-env'],
           ['@babel/preset-react', { runtime: 'automatic' }],
@@ -111,6 +114,7 @@ function createConfig(): webpack.Configuration {
       clean: true,
       environment: { bigIntLiteral: true, dynamicImport: true, module: true },
       filename: `static/js/[name]${__DEV__ ? '' : '.[contenthash:8]'}.js`,
+      iife: true,
       path: path.resolve('dist'),
     },
     plugins: [
